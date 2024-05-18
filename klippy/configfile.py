@@ -191,7 +191,6 @@ class PrinterConfig:
     comment_r = re.compile('[#;].*$')
     value_r = re.compile('[^A-Za-z0-9_].*$')
     def _strip_duplicates(self, data, config):
-        fileconfig = config.fileconfig
         # Comment out fields in 'data' that are defined in 'config'
         lines = data.split('\n')
         section = None
@@ -317,7 +316,7 @@ class PrinterConfig:
         self.printer.set_rollover_info("config", "\n".join(lines))
     # Status reporting
     def runtime_warning(self, msg):
-        logging.warn(msg)
+        logging.warning(msg)
         res = {'type': 'runtime_warning', 'message': msg}
         self.runtime_warnings.append(res)
         self.status_warnings = self.runtime_warnings + self.deprecate_warnings
